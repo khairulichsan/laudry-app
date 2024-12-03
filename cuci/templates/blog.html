@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container centered-navigation">
+    <ul class="navbar-nav d-flex flex-row justify-content-center align-items-center">
+        <!-- Card 1 -->
+        <li class="nav-item mb-4">
+            <div class="card card-nav text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="../">Beranda</a>
+                </div>
+            </div>
+        </li>
+        <!-- Card 2 -->
+        <li class="nav-item mb-4">
+            <div class="card card-nav text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="../about/" >Tentang</a>
+                </div>
+            </div>
+        </li>
+        <!-- Card 3 -->
+        <li class="nav-item mb-4">
+            <div class="card card-nav text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="" >Blog</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <h2 class="display-5 my-4 text-center">Blog Serdam Laundry</h2>
+    <p class="lead text-center">Temukan tips dan informasi menarik seputar perawatan pakaian dan layanan laundry.</p>
+    <div class="row">
+        <!-- Blog 1 -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-nav">
+                <img src="https://images.ctfassets.net/ajjw8wywicb3/7FmJC0yRrvfmxEkg0FAujA/2fc0d9df8fb6bbdc82a4ac1067a5d760/HOW_TO_WASH_CLOTHES_The_art_of_washing_different_fabric_370x320.jpg?fm=png" class="card-img-top" alt="Blog Image">
+                <div class="card-body">
+                    <h5 class="card-title">Cara Merawat Pakaian Berwarna</h5>
+                    <p class="card-text">Pelajari cara menjaga warna pakaian Anda agar tetap cerah dan tidak mudah pudar.</p>
+                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        <!-- Blog 2 -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-nav">
+                <img src="https://image1ws.indotrading.com/s3/productimages/webp/co232819/p814025/w600-h600/aa147633-050f-4fb9-be3e-06becf542e1e.png" class="card-img-top" alt="Blog Image">
+                <div class="card-body">
+                    <h5 class="card-title">Tips Memilih Pewangi Laundry</h5>
+                    <p class="card-text">Ketahui jenis pewangi laundry yang cocok untuk berbagai jenis kain.</p>
+                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        <!-- Blog 3 -->
+        <div class="col-md-4 mb-4">
+            <div class="card card-nav">
+                <img src="https://www.wash.com/wp-content/uploads/2024/02/wash-service-tech-repair.jpg" class="card-img-top" alt="Blog Image">
+                <div class="card-body">
+                    <h5 class="card-title">Keuntungan Menggunakan Laundry Profesional</h5>
+                    <p class="card-text">Temukan alasan mengapa menggunakan layanan laundry profesional sangat menguntungkan.</p>
+                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

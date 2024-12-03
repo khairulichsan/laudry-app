@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container centered-navigation">
+    <ul class="navbar-nav d-flex flex-row justify-content-center align-items-center">
+        <!-- Card 1 -->
+        <li class="nav-item mb-4">
+            <div class="card card-nav text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="">Beranda</a>
+                </div>
+            </div>
+        </li>
+        <!-- Card 2 -->
+        <li class="nav-item mb-4">
+            <div class="card card-nav text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="about/" >Tentang</a>
+                </div>
+            </div>
+        </li>
+        <!-- Card 3 -->
+        <li class="nav-item mb-4">
+            <div class="card card-nav text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="blog/" >Blog</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+    <div class="container text-center">
+        <div class="card p-4 shadow">
+            <h4 class="mb-3">Cari Riwayat Order Pelanggan</h4>
+            <form method="GET" action="">
+                <div class="mb-3">
+                    <label for="nomor_hp" class="form-label">Masukkan Nomor HP:</label>
+                    <input type="text" id="nomor_hp" name="nomor_hp" class="form-control" placeholder="Contoh: 081234567890" required>
+                </div>
+                <button type="submit" class="btn btn-primary px-4">Cari</button>
+            </form>
+        </div>
+
+        <div class="order-list mt-5">
+            {% if orders %}
+                <h2 class="my-4">Riwayat Order untuk Nomor HP: <span class="text-warning">{{ nomor_hp }}</span></h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Jenis Layanan</th>
+                                <th>Harga</th>
+                                <th>Status</th>
+                                <th>Hutang</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.customer.name }}</td>
+                                    <td>{{ order.service_type }}</td>
+                                    <td>Rp {{ order.price|floatformat:2 }}</td>
+                                    <td>{{ order.status }}</td>
+                                    <td>{{ order.debt }}</td>
+                                    <td class="actions">
+                                        <!--<a href="{% url 'delete_order' order.id %}" class="btn btn-danger">Delete</a>-->
+                                        <button class="btn btn-secondary px-4" onclick="showQRCode('{{ order.id }}')">Bayar</button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                {% if nomor_hp %}
+                    <div class="alert alert-warning mt-4">
+                        <strong>Maaf!</strong> Tidak ada riwayat order untuk nomor HP <strong>{{ nomor_hp }}</strong>.
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/PS9Bgbjqrs0?si=obi0XzjIg9IAMdrA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div> 
+
+    <div class="overlay" id="overlay" onclick="closeQRCode()"></div>
+
+    <!-- QR Code Card -->
+    <div class="qr-card" id="qrCard" style="align-items: center;">
+        <h2>Scan QR Code for Payment</h2>
+        <div id="qrcode"></div>
+        <span class="close-qr" onclick="closeQRCode()">Close</span>
+    </div>
+    <script>
+         function showQRCode(orderId) {
+            $('#qrcode').empty(); // Clear previous QR code
+            $('#qrcode').qrcode({
+                text: 'https://paymentlink.com/pay/' + orderId // Ganti dengan URL pembayaran yang sesuai
+            });
+            $('#qrCard').show();
+            $('#overlay').show();
+        }
+
+        function closeQRCode() {
+            $('#qrCard').hide();
+            $('#overlay').hide();
+        }
+    </script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Optional: JavaScript to Auto-Focus Input Field -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("nomor_hp").focus();
+        });
+    </script>
+{% endblock %}
